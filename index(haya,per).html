@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>HAYARA - Where Elegance Meets Values</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+<style>
+  /* Reset */
+  *, *::before, *::after { margin:0; padding:0; box-sizing: border-box; }
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background: #f9f9f7;
+    color: #333;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+  }
+  header {
+    background: #fff;
+    border-bottom: 1px solid #ddd;
+    padding: 20px 0;
+    text-align: center;
+  }
+  .logo-container img {
+    height: 300px;
+    max-width: 500px;
+    width: 400;
+  }
+  .logo-text {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #006d6f;
+    margin-top: 10px;
+  }
+  nav {
+    text-align: center;
+    background: #fff;
+    padding: 12px 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+  nav a {
+    text-decoration: none;
+    color: #006d6f;
+    font-weight: 600;
+    margin: 0 15px;
+    padding: 8px 20px;
+    border-radius: 20px;
+    transition: 0.3s;
+  }
+  nav a:hover, nav a.active {
+    background: #c7a64f;
+    color: #fff;
+  }
+  /* Brand Animation Box */
+  .brand-animation-box {
+    position: absolute;
+    top: 520px;
+    right: 20px;
+    width: 400px;
+    height: 300px;
+    background: rgba(199, 166, 79, 0.08);
+    border: 2px solid #c7a64f;
+    border-radius: 20px;
+    padding: 24px 26px;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    user-select: none;
+    overflow: hidden;
+    z-index: 999;
+  }
+  .animated-letters {
+    display: flex;
+    gap: 18px;
+    font-weight: 700;
+    font-size: 4.2rem;
+    color: #c7a64f;
+    height: 70px;
+  }
+  .animated-letters span {
+    opacity: 0;
+    transform: translateY(40px);
+    animation-fill-mode: forwards;
+  }
+  .animated-tagline {
+    margin-top: 32px;
+    font-size: 1.28rem;
+    font-weight: 600;
+    color: #006d6f;
+    white-space: nowrap;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 40px;
+  }
+  .animated-tagline span {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    display: inline-block;
+  }
+  /* Hero Section */
+  #hero {
+    padding: 120px 20px 60px;
+    background: linear-gradient(to right, #eaf4f4, #fff);
+    text-align: center;
+  }
+  #hero h1 {
+    font-size: 3.5rem;
+    color: #006d6f;
+    margin-bottom: 20px;
+    animation: fadeIn 2s ease forwards;
+    opacity: 0;
+  }
+  #hero p {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto 30px;
+    animation: fadeIn 3s ease forwards;
+    opacity: 0;
+  }
+  #hero .btn {
+    background: linear-gradient(90deg, #006d6f 65%, #c7a64f 100%);
+    color: #fff;
+    font-weight: 700;
+    padding: 14px 40px;
+    border-radius: 30px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border: none;
+    cursor: pointer;
+    animation: fadeIn 4s ease forwards;
+    opacity: 0;
+  }
+  #hero .btn:hover {
+    background: linear-gradient(90deg, #c7a64f 65%, #006d6f 100%);
+    color: #222;
+  }
+  @keyframes fadeIn {
+    to { opacity: 1; }
+  }
+  /* Swiper Section */
+  .swiper {
+    width: 90%;
+    max-width: 960px;
+    margin: 60px auto;
+    padding-bottom: 50px;
+  }
+  .swiper-slide {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: transform 0.3s;
+  }
+  .swiper-slide:hover {
+    transform: scale(1.05);
+  }
+  .swiper-slide img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+  }
+  .swiper-slide h3 {
+    padding: 16px;
+    font-size: 1.2rem;
+    color: #006d6f;
+  }
+  /* Collection Section */
+  #collection {
+    padding: 80px 20px;
+    text-align: center;
+  }
+  #collection h2 {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    color: #006d6f;
+  }
+  .products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .product-card {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0,109,111,0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  .product-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(199,166,79,0.3);
+  }
+  .product-card img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+  }
+  .product-card h3 {
+    padding: 12px;
+    font-size: 1.1rem;
+    color: #006d6f;
+  }
+  .product-card p {
+    padding: 0 12px 12px;
+    color: #c7a64f;
+    font-weight: 600;
+  }
+  /* About Section */
+  #about {
+    background: #eaf4f4;
+    padding: 80px 20px;
+    text-align: center;
+  }
+  #about h2 {
+    font-size: 2.5rem;
+    color: #006d6f;
+    margin-bottom: 20px;
+  }
+  #about p {
+    max-width: 700px;
+    margin: 0 auto;
+    font-size: 1.1rem;
+    color: #444;
+    line-height: 1.6;
+  }
+  /* Why Choose Us Section */
+  #why-choose-us {
+    background: #fff;
+    padding: 68px 18px 44px 18px;
+    text-align: center;
+  }
+  #why-choose-us h2 {
+    color: #006d6f;
+    font-size: 2.3rem;
+    margin-bottom: 22px;
+    font-weight: 700;
+  }
+  #why-choose-us > div {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+    gap: 32px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  #why-choose-us > div > div {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 6px 24px rgba(199,166,79,0.16);
+    padding: 42px 22px;
+    text-align: center;
+  }
+  #why-choose-us > div > div h3 {
+    color: #006d6f;
+    font-weight: 700;
+    margin-bottom: 14px;
+    font-size: 1.25rem;
+  }
+  #why-choose-us > div > div p {
+    color: #444;
+    font-size: 1.06rem;
+  }
+  /* Testimonials Section */
+  #testimonials {
+    padding: 80px 20px;
+    text-align: center;
+  }
+  #testimonials h2 {
+    font-size: 2.5rem;
+    color: #006d6f;
+    margin-bottom: 60px;
+  }
+  .testimonial-cards {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+    gap: 20px;
+  }
+  .testimonial {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    opacity: 0;
+    transform: translateY(40px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.6s ease;
+  }
+  .testimonial.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .testimonial:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(199,166,79,0.3);
+  }
+  .testimonial p {
+    font-style: italic;
+    color: #555;
+  }
+  .testimonial h4 {
+    margin-top: 12px;
+    color: #c7a64f;
+  }
+  /* Gallery Section */
+  #gallery {
+    padding: 80px 20px;
+    text-align: center;
+  }
+  #gallery h2 {
+    font-size: 2.5rem;
+    color: #006d6f;
+    margin-bottom: 40px;
+  }
+  .gallery-images {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .gallery-images img {
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    cursor: pointer;
+  }
+  .gallery-images img:hover {
+    transform: scale(1.05);
+  }
+  /* Newsletter Section */
+  #newsletter {
+    background: #eaf4f4;
+    padding: 62px 18px 58px 18px;
+    text-align: center;
+  }
+  #newsletter h2 {
+    color: #006d6f;
+    font-size: 2.08rem;
+    margin-bottom: 14px;
+    font-weight: 700;
+  }
+  #newsletter p {
+    max-width: 560px;
+    margin: 0 auto 20px;
+    color: #444;
+    font-size: 1rem;
+  }
+  #newsletter form {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    max-width: 400px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+  }
+  #newsletter input[type=email] {
+    flex: 1 1 180px;
+    padding: 14px;
+    border-radius: 22px;
+    border: 1.5px solid #c7a64f;
+    font-size: 1rem;
+  }
+  #newsletter button {
+    background: linear-gradient(90deg, #006d6f 65%, #c7a64f 100%);
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.05rem;
+    border: none;
+    border-radius: 22px;
+    padding: 14px 32px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  #newsletter button:hover {
+    background: linear-gradient(90deg, #c7a64f 65%, #006d6f 100%);
+  }
+  /* Contact Section */
+  #contact {
+    background: #eaf4f4;
+    padding: 80px 20px;
+    text-align: center;
+  }
+  #contact h2 {
+    font-size: 2.5rem;
+    color: #006d6f;
+    margin-bottom: 20px;
+  }
+  #contact form {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  #contact input, #contact textarea {
+    padding: 14px;
+    border-radius: 12px;
+    border: 1.5px solid #ccc;
+    font-size: 1rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  #contact input:focus, #contact textarea:focus {
+    outline: none;
+    border-color: #c7a64f;
+    box-shadow: 0 4px 12px rgba(199,166,79,0.3);
+  }
+  #contact button.btn {
+    background: linear-gradient(90deg, #006d6f 65%, #c7a64f 100%);
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.1rem;
+    padding: 14px;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+  }
+  #contact button.btn:hover {
+    background: linear-gradient(90deg, #c7a64f 65%, #006d6f 100%);
+    color: #222;
+    transform: scale(1.05);
+  }
+  /* Footer Section */
+  footer {
+    background: #006d6f;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    font-weight: 600;
+  }
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .brand-animation-box {
+      position: static;
+      width: 100%;
+      height: auto;
+      margin: 20px auto 40px;
+      border: none;
+      box-shadow: none;
+      padding: 0;
+      flex-direction: row;
+      justify-content: center;
+      gap: 15px;
+    }
+    .animated-letters {
+      font-size: 2.5rem;
+      letter-spacing: 0.25em;
+    }
+    .animated-tagline {
+      margin-top: 0;
+      position: static;
+      width: auto;
+      border: none;
+      background: none;
+      animation: none !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+  }
+  @media (max-width: 480px) {
+    #hero h1 {
+      font-size: 2.8rem;
+    }
+    nav {
+      font-size: 0.9rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-container">
+    <img src="hayara.jpg" alt="HAYARA Logo" />
+    <div class="logo-text">HAYARA</div>
+  </div>
+</header>
+
+<nav>
+  <a href="#hero" class="active">Home</a>
+  <a href="#collection">Collection</a>
+  <a href="#about">About</a>
+  <a href="#testimonials">Testimonials</a>
+  <a href="#gallery">Gallery</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<!-- Brand Animation Box -->
+<div class="brand-animation-box" aria-hidden="true" role="complementary" aria-label="Brand animation">
+  <div class="animated-letters" aria-label="Animated letters spelling H A Y A R A">
+    <span>H</span><span>A</span><span>Y</span><span>A</span><span>R</span><span>A</span>
+  </div>
+  <div class="animated-tagline" aria-label="Tagline: Where Elegance Meets Values">
+    <span>Where Elegance Meets Values</span>
+  </div>
+</div>
+
+<section id="hero">
+  <h1>Elegance Redefined</h1>
+  <p>Discover fashion pieces that blend tradition with modern elegance. Welcome to <strong>HAYARA</strong>, where style meets values.</p>
+  <button class="btn">Explore Now</button>
+</section>
+
+<section class="swiper mySwiper" aria-label="Featured Styles">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide">
+      <img src="cau1shirts.jpg" alt="Classic Casual Shirt" />
+      <h3>Casual Shirts</h3>
+    </div>
+    <div class="swiper-slide">
+      <img src="ljacket.jpg" alt="Elegant Leather Jacket" />
+      <h3>Elegant Jackets</h3>
+    </div>
+    <div class="swiper-slide">
+      <img src="cauphants.jpg" alt="Relaxed Pants" />
+      <h3>Comfortable Pants</h3>
+    </div>
+    <div class="swiper-slide">
+      <img src="stydresses.jpg" alt="Stylish Designer Dress" />
+      <h3>Stylish Dresses</h3>
+    </div>
+  </div>
+  <div class="swiper-pagination"></div>
+</section>
+
+<section id="collection" class="reveal">
+  <h2>Our Collection</h2>
+  <div class="products">
+    <div class="product-card">
+      <img src="cshirts.jpg" alt="Classic Casual Shirt" />
+      <h3>Classic Shirt</h3>
+      <p>₹999</p>
+    </div>
+    <div class="product-card">
+      <img src="elejacket.jpg" alt="Elegant Leather Jacket" />
+      <h3>Leather Jacket</h3>
+      <p>₹1999</p>
+    </div>
+    <div class="product-card">
+      <img src="rephants.jpg" alt="Relaxed Pants" />
+      <h3>Relaxed Pants</h3>
+      <p>₹799</p>
+    </div>
+    <div class="product-card">
+      <img src="evedress.jpg" alt="Stylish Designer Dress" />
+      <h3>Evening Dress</h3>
+      <p>₹1499</p>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="reveal">
+  <h2>About HAYARA</h2>
+  <p>At HAYARA, fashion is more than clothing—it’s a reflection of authenticity, refinement, and purpose. Each piece celebrates a story where tradition and modernity mix in elegant forms, designed to elevate your style every day.</p>
+</section>
+
+<section id="why-choose-us" class="reveal">
+  <h2>Why Choose Us</h2>
+  <div>
+    <div>
+      <h3>Premium Quality</h3>
+      <p>Finest materials and flawless craftwork for lasting comfort.</p>
+    </div>
+    <div>
+      <h3>Timeless Style</h3>
+      <p>Classic meets modern with original design, season after season.</p>
+    </div>
+    <div>
+      <h3>Best Value</h3>
+      <p>Unmatched value for price, quality, and experience.</p>
+    </div>
+    <div>
+      <h3>Friendly Support</h3>
+      <p>Enjoy smooth service and top-rated help every time.</p>
+    </div>
+  </div>
+</section>
+
+<section id="testimonials" class="reveal">
+  <h2>What Our Customers Say</h2>
+  <div class="testimonial-cards">
+    <div class="testimonial" tabindex="0">
+      <p>"Amazing collection! The quality is unmatched and the designs are elegant."</p>
+      <h4>- Sarah M.</h4>
+    </div>
+    <div class="testimonial" tabindex="0">
+      <p>"I love the attention to detail. Every piece feels luxurious yet wearable."</p>
+      <h4>- James K.</h4>
+    </div>
+    <div class="testimonial" tabindex="0">
+      <p>"The customer service and experience were top-notch. Highly recommend!"</p>
+      <h4>- Priya S.</h4>
+    </div>
+  </div>
+</section>
+
+<section id="gallery" class="reveal">
+  <h2>Gallery</h2>
+  <div class="gallery-images">
+    <img src="gallery1.jpg" alt="Elegant Leather Jacket" />
+    <img src="gallery2.jpg" alt="Relaxed Pants" />
+    <img src="gallery3.jpg" alt="Classic Casual Shirt" />
+    <img src="gallery4.jpg" alt="Stylish Designer Dress" />
+    <img src="gallery5.jpg" alt="Formal Men Suit" />
+    <img src="gallery6.jpg" alt="Men’s Winter Essentials" />
+  </div>
+</section>
+
+<section id="newsletter" class="reveal">
+  <h2>Subscribe to Our Newsletter</h2>
+  <p>Get early access to arrivals, exclusive offers & best style tips. Direct to your inbox.</p>
+  <form>
+    <input type="email" placeholder="Your email address" required />
+    <button type="submit" class="btn">Subscribe</button>
+  </form>
+</section>
+
+<section id="contact" class="reveal">
+  <h2>Contact Us</h2>
+  <form>
+    <input type="text" placeholder="Your Name" required />
+    <input type="email" placeholder="Email Address" required />
+    <textarea rows="5" placeholder="Your Message" required></textarea>
+    <button type="submit" class="btn">Send Message</button>
+  </form>
+</section>
+
+<footer>
+  &copy; 2025 HAYARA. All Rights Reserved.
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+<script>
+  const swiper = new Swiper(".mySwiper", {
+    loop: true,
+    autoplay: { delay: 3000, disableOnInteraction: false },
+    pagination: { el: ".swiper-pagination", clickable: true },
+  });
+
+  document.querySelectorAll('nav a').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+      link.classList.add('active');
+      const target = document.querySelector(link.getAttribute('href'));
+      if(target) window.scrollTo({ top: target.offsetTop - 100, behavior: 'smooth' });
+    });
+  });
+
+  function revealOnScroll(){
+    const reveals = document.querySelectorAll('.reveal, .product-card, .testimonial');
+    const windowHeight = window.innerHeight;
+    reveals.forEach(elem => {
+      const top = elem.getBoundingClientRect().top;
+      if (top < windowHeight - 160) elem.classList.add('visible');
+    });
+  }
+  window.addEventListener('scroll', revealOnScroll);
+  window.addEventListener('load', revealOnScroll);
+
+  // Brand animation loop
+  const letters = document.querySelectorAll('.animated-letters span');
+  const tagline = document.querySelector('.animated-tagline span');
+
+  function animateBrandCycle(){  
+    letters.forEach(l => {
+      l.style.opacity = '0';
+      l.style.transform = 'translateY(40px)';
+      l.style.transition = 'opacity 0.5s, transform 0.5s';
+    });
+    tagline.style.left = '-100%';
+    tagline.style.opacity = '0';
+
+    letters.forEach((letter, i) => {
+      setTimeout(() => {
+        letter.style.opacity = '1';
+        letter.style.transform = 'translateY(0)';
+      }, i * 850);
+    });
+
+    // Show full letters for 2.5s after the last letter fades in
+    const lettersDisplayDuration = letters.length * 850 + 2500;
+
+    // Animate tagline in from left after letters fully appear + 0.5s delay
+    setTimeout(() => {
+      tagline.style.transition = 'left 1.6s ease, opacity 0.6s ease';
+      tagline.style.left = '0';
+      tagline.style.opacity = '1';
+    }, lettersDisplayDuration + 500);
+
+    // After tagline shown for 2.5s, fade out everything for next loop
+    setTimeout(() => {
+      tagline.style.transition = 'left 0.7s ease, opacity 0.7s ease';
+      tagline.style.left = '100%';
+      tagline.style.opacity = '0';
+      letters.forEach(l => {
+        l.style.transition = 'opacity 0.7s, transform 0.7s';
+        l.style.opacity = '0';
+        l.style.transform = 'translateY(-40px)';
+      });
+    }, lettersDisplayDuration + 500 + 2500);
+
+    // Repeat cycle every full duration (~10.5 sec)
+    setTimeout(animateBrandCycle, lettersDisplayDuration + 500 + 2500 + 700);
+  }
+  animateBrandCycle();
+</script>
+</body>
+</html>
