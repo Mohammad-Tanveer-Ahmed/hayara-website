@@ -24,7 +24,7 @@ The website is designed to highlight the elegance and values of the HAYARA brand
 
 ## 📂 Folder Structure
 HAYARA/
-├── index(haya,per).html
+├── index.html
 ├── hayara.jpg
 ├── cau1shirts.jpg
 ├── ljacket.jpg
