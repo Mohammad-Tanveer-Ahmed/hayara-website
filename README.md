@@ -18,8 +18,8 @@ The website is designed to highlight the elegance and values of the HAYARA brand
 
 ## ⚙️ Setup Instructions
 1. Download or clone this repository.
-2. Open the `index(haya,per).html` file in any modern web browser like Chrome or Firefox.
-3. Make sure all image files used in the project (like `hayara.jpg`, `cau1shirts.jpg`, etc.) are placed in the same folder as `index(haya,per).html`.
+2. Open the `index.html` file in any modern web browser like Chrome or Firefox.
+3. Make sure all image files used in the project (like `hayara.jpg`, `cau1shirts.jpg`, etc.) are placed in the same folder as `index.html`.
 4. No additional installation or setup is needed — simply open and enjoy the website!
 
 ## 📂 Folder Structure
